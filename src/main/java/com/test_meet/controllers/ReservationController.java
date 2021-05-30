@@ -33,7 +33,7 @@ public class ReservationController {
     // Check if reservation is bigger than the current date
     if (reservation.getStart().isBefore(LocalDateTime.now())
         && reservation.getEnd().isBefore(LocalDateTime.now())) {
-      throw new Exception("The dates have to be bigger than the current date");
+      throw new IllegalArgumentException("The dates have to be bigger than the current date");
     }
 
     // Add clean time
@@ -48,33 +48,38 @@ public class ReservationController {
             .sorted(Comparator.comparing(Reservation::getStart))
             .collect(Collectors.toList());
 
-    // If list is empty add, otherwise check is possible add
-    if (reservationList.isEmpty()) {
+    Boolean isReservation = true;
+
+    // Set id in reservation
+    int listSize = reservationList.size();
+    reservation.setId(listSize + 1);
+
+    for (int i = 0; i < listSize; i++) {
+      Reservation current = reservationList.get(i);
+      Reservation next;
+      isReservation = false;
+
+      try {
+        next = reservationList.get(i + 1);
+      } catch (Exception e) {
+        next = null;
+      }
+
+      // Check if is possible add reservation inside list
+      if ((reservation.getEnd().isBefore(current.getStart()) && i == 0)
+          || (reservation.getStart().isAfter(current.getEnd()) && i == (listSize - 1))
+          || (next != null
+              && reservation.getStart().isAfter(current.getEnd())
+              && reservation.getEnd().isBefore(next.getStart()))) {
+        isReservation = true;
+        break;
+      }
+    }
+
+    if (isReservation) {
       this.reservationRepository.create(reservation);
     } else {
-
-      int listSize = reservationList.size();
-      reservation.setId(listSize + 1);
-
-      for (int i = 0; i < listSize; i++) {
-        Reservation current = reservationList.get(i);
-        Reservation next;
-
-        try {
-          next = reservationList.get(i + 1);
-        } catch (Exception e) {
-          next = null;
-        }
-
-        // Check if is possible add reservation inside list
-        if ((reservation.getEnd().isBefore(current.getStart()) && i == 0)
-            || (reservation.getStart().isAfter(current.getEnd()) && i == (listSize - 1))
-            || (next != null
-                && reservation.getStart().isAfter(current.getEnd())
-                && reservation.getEnd().isBefore(next.getStart()))) {
-          this.reservationRepository.create(reservation);
-        }
-      }
+      throw new Exception("There is no availability to create the reservation");
     }
   }
 

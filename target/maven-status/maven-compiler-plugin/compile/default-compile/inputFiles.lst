@@ -1,0 +1,14 @@
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/repositories/MeetingRoomRepository.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/views/App.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/repositories/Repository.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/models/Floor.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/models/Building.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/controllers/ReservationController.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/models/MeetingRoom.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/dto/ReservationsBoardDTO.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/repositories/FloorRepository.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/views/ReservationsForm.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/repositories/BuildingRepository.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/repositories/ReservationRepository.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/dto/ComboItemDTO.java
+/Users/luispereira/Desktop/test_meet/src/main/java/com/test_meet/models/Reservation.java
